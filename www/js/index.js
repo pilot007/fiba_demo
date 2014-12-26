@@ -167,33 +167,39 @@ var app = {
 	
 	fnc_Mesajlar : function() {
 				$("#un_mesajlar").empty();
-		        $("#un_mesajlar").append(app.user_name);
-				$("#point_mesajlar").empty();
-		        $("#point_mesajlar").append(app.total_points);
+		        $("#un_mesajlar").append(app.user_name + "("+app.total_points+")");
 	},	
     fnc_Profil : function() {
 				$("#un_profil").empty();
-		        $("#un_profil").append(app.user_name);
-				$("#point_profil").empty();
-		        $("#point_profil").append(app.total_points);
+		        $("#un_profil").append(app.user_name+ "("+app.total_points+")");
+		        $("#txt_isim").val(app.name +" "+ app.surname);
+		        $("#tx_tckn").val(app.identityno);
+		        $("#txt_dogumtarihi").val(app.birthdate);
+				$("#txt_cep_tel").val(app.mobile);
+				$("#txt_email").val(app.email);
+				$("#txt_adres").val(app.address_text);
+				if(app.allow_email==1)
+				$('#chk_mail').Attr('checked',true);
+				else
+				$('#chk_mail').Attr('checked',false);
+				
+				if(app.allow_sms==1)
+				$('#chk_sms').Attr('checked',true);
+				else
+				$('#chk_sms').Attr('checked',false);
+
 	},
 	fnc_Kampanyalar : function() {
 				$("#un_kampanyalar").empty();
-		        $("#un_kampanyalar").append(app.user_name);
-				$("#point_kampanyalar").empty();
-		        $("#point_kampanyalar").append(app.total_points);
+		        $("#un_kampanyalar").append(app.user_name+ "("+app.total_points+")");
 	},			
 	fnc_Istatistik : function() {
 				$("#un_istatistik").empty();
-		        $("#un_istatistik").append(app.user_name);
-				$("#point_istatistik").empty();
-		        $("#point_istatistik").append(app.total_points);
+		        $("#un_istatistik").append(app.user_name+ "("+app.total_points+")");
 	},
 	fnc_EnYakin : function() {
 				$("#un_enyakin").empty();
-		        $("#un_enyakin").append(app.user_name);
-				$("#point_enyakin").empty();
-		        $("#point_enyakin").append(app.total_points);
+		        $("#un_enyakin").append(app.user_name+ "("+app.total_points+")");
 	},			
 	member_savefunc : function() {
 	},	
@@ -232,8 +238,8 @@ var app = {
 			dataType : "json",
 			success : function(a, b, c) {
 					app.total_points=a[0].total_point;
-					$("#point_barkod").empty();
-					$("#point_barkod").append(app.total_points);
+					$("#un_barkod").empty();
+					$("#un_barkod").append(app.user_name+ "("+app.total_points+")");
 					
 					
 			},
@@ -250,13 +256,30 @@ var app = {
 		
 		
 		
-		if(app.username==null){
+		if(app.user_name==null){
 		$.ajax({			
-			url : app.url+"/istakip_yesis_webservices/GetMyActivities?android_id="+app.uuid+"&jsonType=1&con_type=getUserName",
+			url : app.url+"GetMember?member_id=1",
 			dataType : "json",
 			success : function(a, b, c) {
 				if (a.length>0)		
-				  app.username ="Merhaba : " + a[0].user_name;
+				{
+				  app.user_name ="Merhaba : " + a[0].name + " " + a[0].surname;
+				  app.identityno=a[0].identityno;
+				  app.name=a[0].name;
+				  app.surname=a[0].surname;
+				  app.birthdate=a[0].birthdate;
+				  app.Birth_place=a[0].Birth_place;
+				  app.address_type=a[0].address_type;
+				  app.address_text=a[0].address_text;
+				  app.city_id=a[0].city_id;
+				  app.allow_email=a[0].allow_email;
+				  app.allow_sms=a[0].allow_sms;
+				  app.mobile=a[0].mobile;
+				  app.work_phone=a[0].work_phone;
+				  app.home_phone=a[0].home_phone;
+				  app.fax=a[0].fax;
+				  app.email=a[0].email;				  
+				 }
 				else
 				  $("#device_info").append('Kullanıcı tanımınız yapılmamıştır. Lütfen yöneticinize danışınız ');
 			},
