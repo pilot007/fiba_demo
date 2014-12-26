@@ -131,7 +131,7 @@ var app = {
 				 
 				
 				for (var i = 0; i < a.length; i++) {
-				html ="<table>";
+				html ="<table style='width:100%'>";
 					console.log("puanlarım 4");
 					html += '<tr><td width="50%">'+ a[i].company_name+ '</td>';
 					html += '<td width="30%">' + a[i].activity_date + '</td>';
