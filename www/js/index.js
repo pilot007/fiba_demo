@@ -2,24 +2,48 @@ var lineChartData = {
  labels : ["","","","","","",""],
  datasets : [
  {
- fillColor : "rgba(220,220,220,0.5)",
- strokeColor : "rgba(220,220,220,1)",
- pointColor : "rgba(220,220,220,1)",
- pointStrokeColor : "#fff",
- data : [65,59,90,81,56,55,40]
- },
- {
  fillColor : "rgba(151,187,205,0.5)",
  strokeColor : "rgba(151,187,205,1)",
  pointColor : "rgba(151,187,205,1)",
  pointStrokeColor : "#fff",
- data : [28,48,40,19,96,27,100]
+ data : [50,90,140,190,500,750,1050]
  }
  ]
  
  };
      var pieData = [
-      ];
+    {
+        value: 300,
+        color:"#F7464A",
+        highlight: "#FF5A5E",
+        label: "Swiss Otel"
+    },
+    {
+        value: 50,
+        color: "#46BFBD",
+        highlight: "#5AD3D1",
+        label: "GAP"
+    },
+    {
+        value: 100,
+        color: "#FDB45C",
+        highlight: "#FFC870",
+        label: "Fiba Emeklilik"
+    },
+    {
+        value: 40,
+        color: "#949FB1",
+        highlight: "#A8B3C5",
+        label: "FibaBank"
+    },
+    {
+        value: 120,
+        color: "#4D5360",
+        highlight: "#616774",
+        label: "Mark&Spencers"
+    }
+
+];
     var pieOptions = [
 {
     //Boolean - Whether we should show a stroke on each segment
@@ -52,8 +76,7 @@ var app = {
 	initialize : function() {
 		console.log("init");
 		this.bindEvents();
-		app.url="http://85.97.120.30:9090";
-		
+		app.url="http://10.0.0.31:8080/fiba_group_webservices/";
 		//app.url="http://127.0.0.1:9090";
 		//app.first_init();
 	},
@@ -95,6 +118,46 @@ var app = {
 	fnc_Puanlarim : function() {
 				$("#un_puanlarim").empty();
 		        $("#un_puanlarim").append(app.user_name);
+		        console.log("puanlarım 1");
+		$.ajax({
+			url : app.url+"GetAcitivies?member_id=1",
+			dataType : "json",
+			success : function(a, b, c) {
+				console.log("puanlarım 2");
+				$('#div_puanlarim ul').remove();
+				$('#div_puanlarim').append('<ul data-role="listview"></ul>');
+				listItems = $('#div_puanlarim').find('ul');
+console.log("puanlarım 3");
+				for (var i = 0; i < a.length; i++) {
+					console.log("puanlarım 4");
+					html = '<h1><a >'+ a[i].company_name+ '</a></h1>';
+					html += ' <p> ' + a[i].point + '</p>';
+					listItems.append('<li id="prj_' + a[i].activity_id + '">' + html + '</li>');
+				};
+				$('#div_puanlarim ul').listview();
+				console.log("puanlarım 5");
+				for (var i = 0; i < a.length; i++) {
+					console.log("puanlarım 6");
+					$('#prj_' + a[i].activity_id).bind('tap',
+					function(event, ui) {
+						var strID = $(this).attr('id').replace('prj_','');
+						app.getProductsDetay(strID);
+					});
+				}
+
+		    },
+			error : function(a, b, c) {
+				$("#device_info").append('hata aldı '+ '<br />');
+				element2.innerHTML = "hata username:";
+
+				console.log("err a ", a);
+				console.log("err b ", b);
+				console.log("err c ", c);
+				console.log("err c ", c);
+			}
+		});
+				        
+		        		
 	},	
 	
 	fnc_Mesajlar : function() {
@@ -141,7 +204,10 @@ var app = {
 		$("#un_barkod2").empty();
 		$("#un_barkod2").append(app.user_name);
 
+				new Chart(document.getElementById("pie").getContext("2d")).Pie(pieData,pieOptions);
+				new Chart(document.getElementById("line").getContext("2d")).Line(lineChartData);
 
+/*
 		$.ajax({
 			url : app.url+"/istakip_yesis_webservices/GetMyActivities?android_id="+"123456789"+"&jsonType=1&con_type=getPieChart",
 			dataType : "json",
@@ -176,7 +242,7 @@ var app = {
 			}
 		});
 		
-		
+		*/
 		
 		if(app.username==null){
 		$.ajax({			
@@ -446,16 +512,6 @@ var app = {
 		app.first_init();	
 		console.log("getProductsDetay:", app.id);
 
-/*
-$.when(
-		$.get("http://85.97.120.30:9090/istakip_yesis_webservices/GetMyActivities?android_id=9feff6f179273142&jsonType=1&con_type=getactivity&activity_type_id=" + app.id, {},
-		  function(data){
-		    alert("Data Loaded: " + data);
-		  }
-		 ).then(function( data, textStatus, jqXHR ) {
-  //alert( jqXHR.status ); // Alerts 200
-})
-);*/
 		
 		$.when(  
 		$.ajax({
