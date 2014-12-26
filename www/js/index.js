@@ -127,13 +127,18 @@ var app = {
 				$('#div_puanlarim ul').remove();
 				$('#div_puanlarim').append('<ul data-role="listview"></ul>');
 				listItems = $('#div_puanlarim').find('ul');
-console.log("puanlarım 3");
+				console.log("puanlarım 3");
+				 
+				
 				for (var i = 0; i < a.length; i++) {
+				html ="<table>";
 					console.log("puanlarım 4");
-					html = '<h1><a >'+ a[i].company_name+ '</a></h1>';
-					html += ' <p> ' + a[i].point + '</p>';
+					html += '<tr><td>'+ a[i].company_name+ '</td>';
+					html += '<td>' + a[i].points + '</td></tr>';
+				    html+="</table>";
 					listItems.append('<li id="prj_' + a[i].activity_id + '">' + html + '</li>');
 				};
+				
 				$('#div_puanlarim ul').listview();
 				console.log("puanlarım 5");
 				for (var i = 0; i < a.length; i++) {
