@@ -134,7 +134,7 @@ var app = {
 				html ="<table>";
 					console.log("puanlarım 4");
 					html += '<tr><td width="50%">'+ a[i].company_name+ '</td>';
-					html += '<tdwidth="30%">' + a[i].activity_date + '</td>';
+					html += '<td width="30%">' + a[i].activity_date + '</td>';
 					html += '<td width="20%">' + a[i].points + '</td></tr>';
 				    html+="</table>";
 					listItems.append('<li id="prj_' + a[i].activity_id + '">' + html + '</li>');
