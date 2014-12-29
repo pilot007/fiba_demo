@@ -111,7 +111,6 @@ var app = {
 		
 		//checkConnection();
 	},
-	productList : null,
 	fnc_Barkod : function() {
 				$("#un_barkod").empty();
 		        $("#un_barkod").append(app.user_name + "("+app.total_points+")");
@@ -171,21 +170,22 @@ var app = {
     fnc_Profil : function() {
 				$("#un_profil").empty();
 		        $("#un_profil").append(app.user_name+ "("+app.total_points+")");
-		        $("#txt_isim").val(app.name +" "+ app.surname);
+		        $("#txt_isim").val(app.name);
+		        $("#txt_soyisim").val(app.surname);
 		        $("#tx_tckn").val(app.identityno);
 		        $("#txt_dogumtarihi").val(app.birthdate);
 				$("#txt_cep_tel").val(app.mobile);
 				$("#txt_email").val(app.email);
 				$("#txt_adres").val(app.address_text);
 				if(app.allow_email==1)
-				$('#chk_mail').Attr('checked',true);
+				$('#chk_mail').prop('checked',true);
 				else
-				$('#chk_mail').Attr('checked',false);
+				$('#chk_mail').prop('checked',false);
 				
 				if(app.allow_sms==1)
-				$('#chk_sms').Attr('checked',true);
+				$('#chk_sms').prop('checked',true);
 				else
-				$('#chk_sms').Attr('checked',false);
+				$('#chk_sms').prop('checked',false);
 
 	},
 	fnc_Kampanyalar : function() {
@@ -199,11 +199,6 @@ var app = {
 	fnc_EnYakin : function() {
 				$("#un_enyakin").empty();
 		        $("#un_enyakin").append(app.user_name+ "("+app.total_points+")");
-	},			
-	member_savefunc : function() {
-	},	
-	getMusteriler : function(){
-	
 	},
 	isnull : function(p){
 		if (p ==null)
@@ -213,9 +208,8 @@ var app = {
 	},
 	first_init : function(){
 		app.uuid = app.isnull(device.uuid);
-		//if (app.uuid==".")
 		app.uuid="586BC0F6-09DC-44FB-8F1D-A3ABCB8E0C80";
-		app.user_name="Merhaba : Ayşe Balcı";
+		app.user_name="Merhaba : ";
 		app.user_id="90910000001";
 		app.id="123456789";
 
@@ -260,7 +254,7 @@ var app = {
 				  app.name=a.name;
 				  app.surname=a.surname;
 				  app.birthdate=a.birthdate;
-				  app.Birth_place=a.Birth_place;
+				  app.birth_place=a.Birth_place;
 				  app.address_type=a.address_type;
 				  app.address_text=a.address_text;
 				  app.city_id=a.city_id;
@@ -328,15 +322,42 @@ var app = {
 		var result= $("#sel_personels option:selected").val();
 		var result2= $("#sel_status option:selected").val();
 		var desc= $("#userDesc").val();
-		//if(app.status==null)
+		
+		        app.name = $("#txt_isim").val();
+		        app.surname= $("#txt_soyisim").val();
+		        app.identityno=$("#tx_tckn").val();
+		        app.birthdate=$("#txt_dogumtarihi").val();
+		        //app.birth_place=$("#txt_dogumyeri").val();
+				app.mobile=$("#txt_cep_tel").val();
+				app.email=$("#txt_email").val();
+				app.address_text=$("#txt_adres").val();
+				if($("#chk_email:selected").val()=="true")
+					app.allow_email=1;
+				else
+					app.allow_email=0;
+				
+				if($("#chk_sms").prop("checked")=="true")
+					app.allow_sms=1;
+				else
+					app.allow_sms=0;
+		
+		app.user_name ="Merhaba : " +app.name  + " "+app.surname;
+		console.log( $("#chk_email").prop("checked") );
+		console.log( $("#chk_sms:selected").val() );
+		//identityno=1234567890&name=selim&surname=göktaş&birthdate=1999&Birth_place=istanbul&address_type=1&address_text=adres&city_id=34&allow_email=0&allow_sms=1&mobile=5362798531&work_phone=536123456&home_phone=5363213232&fax=5363213232&email=selimgoktas@gtech.com.tr
 		{
-		$.ajax({			
-			url : app.url+"/istakip_yesis_webservices/GetMyActivities?android_id="+app.uuid+"&jsonType=1&con_type=updateactivity&temp_activity_type_id="+app.id+"&temp_status_id="+result2+"&temp_assignto="+result + "&desc=" + desc,
+		$.ajax({
+			url : app.url+"/GetMember?member_id="+app.id+
+			"&conn_type=update&identityno="+app.identityno+"&name="+app.name+"&surname="+app.surname+"&birthdate="+app.birthdate+
+			"&Birth_place="+app.birth_place+"&address_type="+app.address_type+"&address_text="+app.address_text+
+			"&city_id="+app.city_id+"&allow_email="+app.allow_email+
+			"&allow_sms="+app.allow_sms+"&mobile="+app.mobile+
+			"&work_phone="+app.work_phone+"&home_phone="+
+			app.home_phone+"&fax="+app.fax+"&email="+app.email ,
 			dataType : "json",
 			success : function(a, b, c) {
-			app.status=a;			
-			$.mobile.changePage($('#benim'));
-			app.getProducts2();
+				console.log( "başarılı" );
+			$.mobile.changePage($('#barkod'));
 			},
 			error : function(a, b, c) {
 				console.log("err a ", a);
