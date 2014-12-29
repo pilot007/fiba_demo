@@ -114,12 +114,11 @@ var app = {
 	productList : null,
 	fnc_Barkod : function() {
 				$("#un_barkod").empty();
-		        $("#un_barkod").append(app.user_name);
+		        $("#un_barkod").append(app.user_name + "("+app.total_points+")");
 	},	
 	fnc_Puanlarim : function() {
 				$("#un_puanlarim").empty();
-		        $("#un_puanlarim").append(app.user_name);
-		        console.log("puanlarım 1");
+		        $("#un_puanlarim").append(app.user_name + "("+app.total_points+")");		        
 		$.ajax({
 			url : app.url+"GetAcitivies?member_id="+app.id,
 			dataType : "json",
