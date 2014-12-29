@@ -9,9 +9,9 @@ var lineChartData = {
  data : [50,90,140,190,500,750,1050]
  }
  ]
- 
  };
-     var pieData = [
+
+var pieData = [
     {
         value: 300,
         color:"#F7464A",
@@ -78,7 +78,7 @@ var app = {
 		this.bindEvents();
 		app.url="http://10.0.0.31:8080/fiba_group_webservices/";
 		app.total_points=0;
-		//app.url="http://127.0.0.1:9090";
+		app.url="http://85.97.120.30:9090/fiba_group_webservices/";
 		//app.first_init();
 	},
 	// Bind Event Listeners
@@ -121,7 +121,7 @@ var app = {
 		        $("#un_puanlarim").append(app.user_name);
 		        console.log("puanlarım 1");
 		$.ajax({
-			url : app.url+"GetAcitivies?member_id=1",
+			url : app.url+"GetAcitivies?member_id="+app.id,
 			dataType : "json",
 			success : function(a, b, c) {
 				console.log("puanlarım 2");
@@ -218,10 +218,8 @@ var app = {
 		app.uuid="586BC0F6-09DC-44FB-8F1D-A3ABCB8E0C80";
 		app.user_name="Merhaba : Ayşe Balcı";
 		app.user_id="90910000001";
-		app.id="1";
-		
-		
-		
+		app.id="123456789";
+
 		$("#un_barkod").empty();
 		$("#un_barkod").append(app.user_name);
 
@@ -231,17 +229,13 @@ var app = {
 		new Chart(document.getElementById("pie").getContext("2d")).Pie(pieData,pieOptions);
 		new Chart(document.getElementById("line").getContext("2d")).Line(lineChartData);
 
-		
-
 		$.ajax({
-			url : app.url+"GetAcitivies?member_id=1&conType=totalpoint",
+			url : app.url+"GetAcitivies?member_id="+app.id+"&conType=totalpoint",
 			dataType : "json",
 			success : function(a, b, c) {
 					app.total_points=a[0].total_point;
 					$("#un_barkod").empty();
-					$("#un_barkod").append(app.user_name+ "("+app.total_points+")");
-					
-					
+					$("#un_barkod").append(app.user_name+ "("+app.total_points+")");					
 			},
 			error : function(a, b, c) {
 				$("#device_info").append('hata aldı '+ '<br />');
@@ -256,32 +250,33 @@ var app = {
 		
 		
 		
-		if(app.user_name==null){
+		//if(app.name==null)
+		{
 		$.ajax({			
-			url : app.url+"GetMember?member_id=1",
+			url : app.url+"GetMember?member_id="+app.id,
 			dataType : "json",
 			success : function(a, b, c) {
-				if (a.length>0)		
 				{
-				  app.user_name ="Merhaba : " + a[0].name + " " + a[0].surname;
-				  app.identityno=a[0].identityno;
-				  app.name=a[0].name;
-				  app.surname=a[0].surname;
-				  app.birthdate=a[0].birthdate;
-				  app.Birth_place=a[0].Birth_place;
-				  app.address_type=a[0].address_type;
-				  app.address_text=a[0].address_text;
-				  app.city_id=a[0].city_id;
-				  app.allow_email=a[0].allow_email;
-				  app.allow_sms=a[0].allow_sms;
-				  app.mobile=a[0].mobile;
-				  app.work_phone=a[0].work_phone;
-				  app.home_phone=a[0].home_phone;
-				  app.fax=a[0].fax;
-				  app.email=a[0].email;				  
+				  app.identityno=a.identityno;
+				  app.name=a.name;
+				  app.surname=a.surname;
+				  app.birthdate=a.birthdate;
+				  app.Birth_place=a.Birth_place;
+				  app.address_type=a.address_type;
+				  app.address_text=a.address_text;
+				  app.city_id=a.city_id;
+				  app.allow_email=a.allow_email;
+				  app.allow_sms=a.allow_sms;
+				  app.mobile=a.mobile;
+				  app.work_phone=a.work_phone;
+				  app.home_phone=a.home_phone;
+				  app.fax=a.fax;
+				  app.email=a.email;
+				  app.user_name ="Merhaba : " + a.name + " " + a.surname;
+				  				  
 				 }
-				else
-				  $("#device_info").append('Kullanıcı tanımınız yapılmamıştır. Lütfen yöneticinize danışınız ');
+				//else
+				//  $("#device_info").append('Kullanıcı tanımınız yapılmamıştır. Lütfen yöneticinize danışınız ');
 			},
 			error : function(a, b, c) {
 				$("#device_info").append('hata aldı '+ '<br />');
