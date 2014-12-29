@@ -114,6 +114,10 @@ var app = {
 	fnc_Barkod : function() {
 				$("#un_barkod").empty();
 		        $("#un_barkod").append(app.user_name + "("+app.total_points+")");
+		        
+				$("#barkod_id").empty();
+				$("#barkod_id").append(app.id);
+		        
 	},	
 	fnc_Puanlarim : function() {
 				$("#un_puanlarim").empty();
@@ -331,19 +335,18 @@ var app = {
 				app.mobile=$("#txt_cep_tel").val();
 				app.email=$("#txt_email").val();
 				app.address_text=$("#txt_adres").val();
-				if($("#chk_email:selected").val()=="true")
+
+				if ($('#chk_mail').is(":checked"))
 					app.allow_email=1;
 				else
 					app.allow_email=0;
 				
-				if($("#chk_sms").prop("checked")=="true")
+				if ($('#chk_sms').is(":checked"))
 					app.allow_sms=1;
 				else
 					app.allow_sms=0;
 		
 		app.user_name ="Merhaba : " +app.name  + " "+app.surname;
-		console.log( $("#chk_email").prop("checked") );
-		console.log( $("#chk_sms:selected").val() );
 		//identityno=1234567890&name=selim&surname=göktaş&birthdate=1999&Birth_place=istanbul&address_type=1&address_text=adres&city_id=34&allow_email=0&allow_sms=1&mobile=5362798531&work_phone=536123456&home_phone=5363213232&fax=5363213232&email=selimgoktas@gtech.com.tr
 		{
 		$.ajax({
