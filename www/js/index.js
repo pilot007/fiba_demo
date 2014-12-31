@@ -1,3 +1,4 @@
+var map;
 var lineChartData = {
  labels : ["","","","","","",""],
  datasets : [
@@ -399,6 +400,7 @@ var app = {
 
 	detectCurrentLocation : function() {
 		var onGeoSuccess = function(position) {
+			
 			console.log(position);
 
 			var location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
@@ -424,7 +426,7 @@ var app = {
 				draggable : true,
 				mapTypeId : google.maps.MapTypeId.ROADMAP
 			};
-			var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+			map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
 			var currentLocationMarker = new google.maps.Marker({
 				position : location,
@@ -438,7 +440,7 @@ var app = {
 			});
 		};
 
-
+		google.maps.event.trigger(map, 'resize');
 
 		var onGeoFail = function(error) {
 			console.log(error);
@@ -449,6 +451,8 @@ var app = {
 			timeout : 10000,
 			enableHighAccuracy : true
 		});
+		
+		google.maps.event.trigger(map, 'resize');
 	},
 	mapLoaded : function() {
 		console.log("mapLoaded");
