@@ -405,6 +405,16 @@ var app = {
 
 			google.maps.visualRefresh = true;
 
+			var info = 
+			    ('Latitude: '         + position.coords.latitude          + '<br>' +
+			    'Longitude: '         + position.coords.longitude         + '<br>' +
+			    'Altitude: '          + position.coords.altitude          + '<br>' +
+			    'Accuracy: '          + position.coords.accuracy          + '<br>' +
+			    'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '<br>' +
+			    'Heading: '           + position.coords.heading           + '<br>' +
+			    'Speed: '             + position.coords.speed             + '<br>' +
+			    'Timestamp: '         + new Date(position.timestamp));
+    
 			var mapOptions = {
 				zoom : 13,
 				center : location,
@@ -428,14 +438,12 @@ var app = {
 			});
 		};
 
+
+
 		var onGeoFail = function(error) {
 			console.log(error);
 		};
 
-		navigator.geolocation.getCurrentPosition(onGeoSuccess, onGeoFail, {
-			timeout : 3000,
-			enableHighAccuracy : true
-		});
 	},
 	mapLoaded : function() {
 		console.log("mapLoaded");
