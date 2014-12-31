@@ -75,6 +75,7 @@ var app = {
 	// Application Constructor
 	initialize : function() {
 		console.log("init");
+		google.load("maps", "3.8", {"callback": map, other_params: "sensor=true&language=en"});
 		this.bindEvents();
 		app.url="http://10.0.0.31:8080/fiba_group_webservices/";
 		app.total_points=0;
@@ -200,9 +201,10 @@ var app = {
 				$("#un_istatistik").empty();
 		        $("#un_istatistik").append(app.user_name+ "("+app.total_points+")");
 	},
-	fnc_EnYakin : function() {
+	fnc_Enyakin : function() {
 				$("#un_enyakin").empty();
 		        $("#un_enyakin").append(app.user_name+ "("+app.total_points+")");
+		        app.detectCurrentLocation();
 	},
 	isnull : function(p){
 		if (p ==null)
