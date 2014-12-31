@@ -440,8 +440,6 @@ var app = {
 			});
 		};
 
-		google.maps.event.trigger(map, 'resize');
-
 		var onGeoFail = function(error) {
 			console.log(error);
 		};
