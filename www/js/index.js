@@ -438,6 +438,35 @@ var app = {
 				optimized : false
 				//animation : google.maps.Animation.BOUNCE
 			});
+			
+// second position for kadikoy
+    var location2 = new google.maps.LatLng(40.980141, 29.08227);
+	var currentLocationMarker2 = new google.maps.Marker({
+		position : location2,
+		map : map,
+		bounds : false,
+		title : 'Kadıköy GAP',
+		//icon : image,
+		//shape : shape,
+		optimized : false
+		//animation : google.maps.Animation.BOUNCE
+		});
+	// third position for uskudar
+	var location3 = new google.maps.LatLng(41.026066, 29.048475);
+	var currentLocationMarker2 = new google.maps.Marker({
+		position : location3,
+		map : map,
+		bounds : false,
+		title : 'Üsküdar GAP',
+		//icon : image,
+		//shape : shape,
+		optimized : false
+		//animation : google.maps.Animation.BOUNCE
+		});
+		//end manuel position
+			
+			
+			
 		};
 
 		var onGeoFail = function(error) {
@@ -448,7 +477,6 @@ var app = {
 			enableHighAccuracy : true
 		});
 		
-		google.maps.event.trigger(map, 'resize');
 	},
 	mapLoaded : function() {
 		console.log("mapLoaded");

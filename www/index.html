@@ -17,7 +17,7 @@
 		<link rel="Stylesheet" href="style/jquery.mobile-1.2.0.min.css" />
  		<script src="Chart.min.js"></script>
  		<script type="text/javascript" src="http://www.google.com/jsapi"></script>
- 		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=true&amp;libraries=places"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2qBI9GSPtX0zrcLHLhPtc519cEPyGotw&sensor=true"> </script> 		
 </head>
     <body onload="app.onDeviceReady()">    	
 	
@@ -251,10 +251,12 @@ puanlarım
 		      </div>               
     </div><!-- /header -->
     <div data-role="content">
-     <div id="map" style="width=250px; height: 250px">
-     </div> 	
-	<div id="div_enyakin">
-	</div>
+  <div data-role="content" id="mapContent" style="padding:0;position:absolute;top:80px;right:0px;bottom:0px;left:0px;">        
+       <div id="map"  style="width:100%; height: 100%;" > </div>
+</div> 
+     
+     
+
 </div>
 </div><!-- /page -->
 
