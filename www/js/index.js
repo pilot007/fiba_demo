@@ -471,6 +471,8 @@ var app = {
 
 		var onGeoFail = function(error) {
 			console.log(error);
+			$.mobile.changePage($('#barkod'));
+			
 		};
 
 		navigator.geolocation.getCurrentPosition(onGeoSuccess, onGeoFail, {
