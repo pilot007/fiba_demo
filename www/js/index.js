@@ -398,91 +398,122 @@ var app = {
 		});
 	},
 
-	detectCurrentLocation : function() {
-		var onGeoSuccess = function(position) {
-			
-			console.log(position);
+detectCurrentLocation : function() {
+        var onGeoSuccess = function(position) {
+            console.log(position);
+        
+            var location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+            
+            google.maps.visualRefresh = true;
 
-			var location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+            var mapOptions = {
+                zoom : 13,
+                center : location,
+                rotateControl : false,
+                streetViewControl : false,
+                mapTypeControl : false,
+                draggable : true,
+                mapTypeId : google.maps.MapTypeId.ROADMAP
+            };
+            var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+            //     current location manuel change default image
+            var image = {
+                url : 'img/aaa.gif',
+                size : new google.maps.Size(38, 38),
+                //size : new google.maps.Size(10, 10),
+                origin : new google.maps.Point(0, 0),
+                // The anchor for this image is the base of the flagpole at 0,32.
+                anchor : new google.maps.Point(19, 19)
+                //anchor : new google.maps.Point(5, 5)
+            };
+            var currentLocationMarker = new google.maps.Marker({
+                position : location,
+                map : map,
+                bounds : false,
+                title : 'Buradasýnýz',
+                icon : image,
+                //shape : shape,
+                optimized : false
+                //animation : google.maps.Animation.BOUNCE
+            });
+//      current location add label and listener
+            setCurrentLocationMessage(currentLocationMarker);
+            function setCurrentLocationMessage(marker) {
+              var message = "<div>Buradasýnýz</div>";
+              var infowindow = new google.maps.InfoWindow({
+                content: message
+              });
+            
+              google.maps.event.addListener(marker, 'click', function() {
+                infowindow.open(map, marker);
+              });
+            }
+//      end current location add label and listener
 
-			google.maps.visualRefresh = true;
+//start manuel position
+//      second position for kadikoy
+        var location2 = new google.maps.LatLng(40.980141, 29.08227);
+        var kadikoyMarker = new google.maps.Marker({
+            position : location2,
+            map : map,
+            bounds : false,
+            title : 'Kadýköy',
+            //icon : image,
+            //shape : shape,
+            optimized : false
+            //animation : google.maps.Animation.BOUNCE
+        });
+       
+//      kadikoy add label and listener
+        setKadikotMessage(kadikoyMarker);
+        function setKadikotMessage(marker) {
+          var message = "<div>Kadıköy</div> <div>Sahil</div>";
+          var infowindow = new google.maps.InfoWindow({
+            content: message
+          });
+        
+          google.maps.event.addListener(marker, 'click', function() {
+            infowindow.open(map, marker);
+          });
+        }
+//      third position for uskudar
 
-			var info = 
-			    ('Latitude: '         + position.coords.latitude          + '<br>' +
-			    'Longitude: '         + position.coords.longitude         + '<br>' +
-			    'Altitude: '          + position.coords.altitude          + '<br>' +
-			    'Accuracy: '          + position.coords.accuracy          + '<br>' +
-			    'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '<br>' +
-			    'Heading: '           + position.coords.heading           + '<br>' +
-			    'Speed: '             + position.coords.speed             + '<br>' +
-			    'Timestamp: '         + new Date(position.timestamp));
-    
-			var mapOptions = {
-				zoom : 13,
-				center : location,
-				rotateControl : false,
-				streetViewControl : false,
-				mapTypeControl : false,
-				draggable : true,
-				mapTypeId : google.maps.MapTypeId.ROADMAP
-			};
-			map = new google.maps.Map(document.getElementById('map'), mapOptions);
+        var location3 = new google.maps.LatLng(41.026066, 29.048475);
+        var uskudarMarker = new google.maps.Marker({
+            position : location3,
+            map : map,
+            bounds : false,
+            title : 'Üsküdar',
+            //icon : image,
+            //shape : shape,
+            optimized : false
+            //animation : google.maps.Animation.BOUNCE
+        });
+        //      uskudar add label and listener
+        setUskudarMessage(uskudarMarker);
+        function setUskudarMessage(marker) {
+          var message = "<div>Üsküdar</div> <div>Merkez</div>";
+          var infowindow = new google.maps.InfoWindow({
+            content: message
+          });
+        
+          google.maps.event.addListener(marker, 'click', function() {
+            infowindow.open(map, marker);
+          });
+        }
+//end manuel position   
+        };
 
-			var currentLocationMarker = new google.maps.Marker({
-				position : location,
-				map : map,
-				bounds : false,
-				title : 'Buradasınız',
-				//icon : image,
-				//shape : shape,
-				optimized : false
-				//animation : google.maps.Animation.BOUNCE
-			});
-			
-// second position for kadikoy
-    var location2 = new google.maps.LatLng(40.980141, 29.08227);
-	var currentLocationMarker2 = new google.maps.Marker({
-		position : location2,
-		map : map,
-		bounds : false,
-		title : 'Kadıköy GAP',
-		//icon : image,
-		//shape : shape,
-		optimized : false
-		//animation : google.maps.Animation.BOUNCE
-		});
-	// third position for uskudar
-	var location3 = new google.maps.LatLng(41.026066, 29.048475);
-	var currentLocationMarker2 = new google.maps.Marker({
-		position : location3,
-		map : map,
-		bounds : false,
-		title : 'Üsküdar GAP',
-		//icon : image,
-		//shape : shape,
-		optimized : false
-		//animation : google.maps.Animation.BOUNCE
-		});
-		//end manuel position
-			
-			
-			
-		};
-
-		var onGeoFail = function(error) {
-			console.log(error);
-			$.mobile.changePage($('#barkod'));
-			
-		};
-
-		navigator.geolocation.getCurrentPosition(onGeoSuccess, onGeoFail, {
-			enableHighAccuracy : true
-		});
-		
-	},
-	mapLoaded : function() {
-		console.log("mapLoaded");
-		app.detectCurrentLocation();
-	}
+        var onGeoFail = function(error) {
+            console.log(error);
+        };
+        
+        navigator.geolocation.getCurrentPosition(onGeoSuccess, onGeoFail, {
+            enableHighAccuracy : true
+        });
+    },
+    mapLoaded : function() {
+        console.log("mapLoaded");
+        app.detectCurrentLocation();
+    }        
 };
-
