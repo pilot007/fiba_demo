@@ -445,8 +445,6 @@ var app = {
 		};
 
 		navigator.geolocation.getCurrentPosition(onGeoSuccess, onGeoFail, {
-			maximumAge: 3000,
-			timeout : 10000,
 			enableHighAccuracy : true
 		});
 		
