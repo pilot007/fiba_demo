@@ -106,7 +106,7 @@ var app = {
 	},
 	onDeviceReady : function() {
 		console.log("ondevice ready");
-		initPushwoosh();
+		//initPushwoosh();
 		app.receivedEvent('deviceready');
 		app.first_init();
 		
