@@ -116,3 +116,12 @@ h1 {
     animation:fade 3000ms infinite;
     -webkit-animation:fade 3000ms infinite;
 }
+.ui-header{
+       background-color: #3e8ac6;
+       
+}
+.ui-bar-a{
+       background-color: #3e8ac6;
+       background-image: linear-gradient(#0d3e65,#3693dd)
+}
+
