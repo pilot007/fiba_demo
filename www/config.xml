@@ -82,6 +82,7 @@
     <access origin="http://85.97.120.30:9090*" />
     <access origin="https://maps.googleapis.com" />
     <access origin="https://maps.google.com" />
+    <access origin="*.pushwoosh.com"/>
     <access origin="*" />
     
 </widget>
