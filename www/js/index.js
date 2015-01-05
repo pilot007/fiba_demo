@@ -71,7 +71,19 @@ var pieData = [
     legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
 
 }
-];		 
+];
+function initPushwoosh() {
+    var pushNotification = window.plugins.pushNotification;
+    if(device.platform == "Android")
+    {
+        registerPushwooshAndroid();
+    }
+
+    if(device.platform == "iPhone" || device.platform == "iOS")
+    {
+        registerPushwooshIOS();
+    }
+}
 var app = {
 	// Application Constructor
 	initialize : function() {
@@ -94,6 +106,7 @@ var app = {
 	},
 	onDeviceReady : function() {
 		console.log("ondevice ready");
+		initPushwoosh();
 		app.receivedEvent('deviceready');
 		app.first_init();
 		
