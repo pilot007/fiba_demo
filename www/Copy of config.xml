@@ -79,8 +79,4 @@
     <access origin="https://maps.googleapis.com" />
     <access origin="https://maps.google.com" />
     <access origin="*" />
-    
-	
-		    
-    
 </widget>
