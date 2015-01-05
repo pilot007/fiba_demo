@@ -24,7 +24,9 @@
 	<gap:plugin name="com.phonegap.plugins.pushplugin" version="2.4.0" />
 	<gap:plugin name="com.simplec.plugins.localnotification" version="0.3.5" />
 	<gap:plugin name="com.phonegap.plugin.statusbar" version="1.1.0" />
-	
+	<!-- Pushwoosh plugin -->
+	<gap:plugin name="com.pushwoosh.plugins.pushwoosh" version="3.4.5" source="plugins.cordova.io" /> 
+
 	<gap:config-file platform="ios" parent="UIStatusBarHidden">
 	    <true/>
 	</gap:config-file>
@@ -72,6 +74,8 @@
     <gap:splash gap:platform="ios" height="1024" src="res/screen/ios/screen-ipad-portrait.png" width="768" />
     <gap:splash gap:platform="ios" height="768" src="res/screen/ios/screen-ipad-landscape.png" width="1024" />
     <gap:splash gap:platform="winphone" src="res/screen/windows-phone/screen-portrait.jpg" />
+    
+    
     <access origin="http://127.0.0.1:8020*" />
     <access origin="http://10.0.0.31*" />
     <access origin="http://85.97.120.30*" />

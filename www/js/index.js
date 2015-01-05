@@ -430,7 +430,7 @@ detectCurrentLocation : function() {
                 position : location,
                 map : map,
                 bounds : false,
-                title : 'Buradasýnýz',
+                title : 'Buradasınız',
                 icon : image,
                 //shape : shape,
                 optimized : false
@@ -457,7 +457,7 @@ detectCurrentLocation : function() {
             position : location2,
             map : map,
             bounds : false,
-            title : 'Kadýköy',
+            title : 'Kadıköy',
             //icon : image,
             //shape : shape,
             optimized : false
