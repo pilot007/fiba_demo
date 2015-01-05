@@ -72,18 +72,7 @@ var pieData = [
 
 }
 ];
-function initPushwoosh() {
-    var pushNotification = window.plugins.pushNotification;
-    if(device.platform == "Android")
-    {
-        registerPushwooshAndroid();
-    }
 
-    if(device.platform == "iPhone" || device.platform == "iOS")
-    {
-        registerPushwooshIOS();
-    }
-}
 var app = {
 	// Application Constructor
 	initialize : function() {
@@ -106,7 +95,7 @@ var app = {
 	},
 	onDeviceReady : function() {
 		console.log("ondevice ready");
-		initPushwoosh();
+		//initPushwoosh();
 		app.receivedEvent('deviceready');
 		app.first_init();
 		
