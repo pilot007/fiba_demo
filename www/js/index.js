@@ -129,18 +129,18 @@ var app = {
 		//checkConnection();
 	},
 	fnc_Barkod : function() {
-				// $("#un_barkod").empty();
-		        // $("#un_barkod").append(app.user_name + "("+app.total_points+")");
-// 		        
-				// $("#barkod_id").empty();
-				// $("#barkod_id").append(app.id);
+				 $("#un_barkod").empty();
+		         $("#un_barkod").append(app.user_name + "("+app.total_points+")");
+ 		        
+				 $("#barkod_id").empty();
+				 $("#barkod_id").append(app.id);
 		        
 	},	
 	fnc_Puanlarim : function() {
 				$("#un_puanlarim").empty();
 		        $("#un_puanlarim").append(app.user_name + "("+app.total_points+")");		        
 		$.ajax({
-			url : app.url+"GetAcitivies?member_id="+app.id,
+			url : app.url+"GetAcitivies?member_id="+app.id+"&uuid="+app.uuid,
 			dataType : "json",
 			success : function(a, b, c) {
 				console.log("puanlarım 2");
@@ -287,7 +287,7 @@ var app = {
 				  app.home_phone=a.home_phone;
 				  app.fax=a.fax;
 				  app.email=a.email;
-				  app.user_name ="Merhaba : " + a.name + " " + a.surname + app.uuid ;
+				  app.user_name ="Merhaba : " + a.name + " " + a.surname  ;
 				  				  
 				 }
 				//else
