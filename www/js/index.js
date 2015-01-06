@@ -228,7 +228,7 @@ var app = {
 	},
 	first_init : function(){
 		app.uuid = app.isnull(device.uuid);
-		app.uuid="586BC0F6-09DC-44FB-8F1D-A3ABCB8E0C80";
+		//app.uuid="586BC0F6-09DC-44FB-8F1D-A3ABCB8E0C80";
 		app.user_name="Merhaba : ";
 		app.user_id="90910000001";
 		app.id="123456789";
@@ -243,7 +243,7 @@ var app = {
 		new Chart(document.getElementById("line").getContext("2d")).Line(lineChartData);
 
 		$.ajax({
-			url : app.url+"GetAcitivies?member_id="+app.id+"&conType=totalpoint",
+			url : app.url+"GetAcitivies?member_id="+app.id+"&conType=totalpoint&uuid="+app.uuid,
 			dataType : "json",
 			success : function(a, b, c) {
 					app.total_points=a[0].total_point;
@@ -266,7 +266,7 @@ var app = {
 		//if(app.name==null)
 		{
 		$.ajax({			
-			url : app.url+"GetMember?member_id="+app.id,
+			url : app.url+"GetMember?member_id="+app.id+"&uuid="+app.uuid,
 			dataType : "json",
 			success : function(a, b, c) {
 				{
