@@ -72,7 +72,7 @@ var pieData = [
 
 }
 ];		 
-function initPushwoosh() {
+	function initPushwoosh() {
     var pushNotification = window.plugins.pushNotification;
     if(device.platform == "Android")
     {
@@ -106,15 +106,14 @@ var app = {
 	},
 	onDeviceReady : function() {
 		console.log("ondevice ready");
-		initPushwoosh();
 		app.receivedEvent('deviceready');
 		//app.uuid = app.isnull(device.uuid);
         app.uuid="586BC0F6-09DC-44FB-8F1D-A3ABCB8E0C80";
         app.user_name="Merhaba : ";
         app.user_id="90910000001";
         app.id="123456789";
-		 app.first_init();	  
-		
+		app.first_init();
+		initPushwoosh();
 	},
 	// Update DOM on a Received Event
 	receivedEvent : function(id) {
