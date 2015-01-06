@@ -26,7 +26,7 @@
 	<gap:plugin name="com.phonegap.plugin.statusbar" version="1.1.0" />
 	<!-- Pushwoosh plugin -->
 	<gap:plugin name="com.pushwoosh.plugins.pushwoosh" version="3.4.5" source="plugins.cordova.io" /> 
-
+	
 	<gap:config-file platform="ios" parent="UIStatusBarHidden">
 	    <true/>
 	</gap:config-file>
@@ -45,7 +45,7 @@
     <preference name="ios-statusbarstyle" value="black-opaque" />
     <preference name="detect-data-types" value="true" />
     <preference name="exit-on-suspend" value="false" />
-    <preference name="show-splash-screen-spinner" value="false" />
+    <preference name="show-splash-screen-spinner" value="true" />
     <preference name="auto-hide-splash-screen" value="true" />
     <preference name="disable-cursor" value="false" />
     <preference name="android-minSdkVersion" value="7" />
@@ -74,8 +74,6 @@
     <gap:splash gap:platform="ios" height="1024" src="res/screen/ios/screen-ipad-portrait.png" width="768" />
     <gap:splash gap:platform="ios" height="768" src="res/screen/ios/screen-ipad-landscape.png" width="1024" />
     <gap:splash gap:platform="winphone" src="res/screen/windows-phone/screen-portrait.jpg" />
-    
-    
     <access origin="http://127.0.0.1:8020*" />
     <access origin="http://10.0.0.31*" />
     <access origin="http://85.97.120.30*" />
@@ -84,5 +82,8 @@
     <access origin="https://maps.google.com" />
     <access origin="*.pushwoosh.com"/>
     <access origin="*" />
+    
+	
+		    
     
 </widget>

@@ -71,7 +71,11 @@ var pieData = [
     legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
 
 }
+<<<<<<< HEAD
 ];
+=======
+];		 
+>>>>>>> origin/master
 function initPushwoosh() {
     var pushNotification = window.plugins.pushNotification;
     if(device.platform == "Android")
@@ -88,12 +92,12 @@ var app = {
 	// Application Constructor
 	initialize : function() {
 		console.log("init");
-		google.load("maps", "3.8", {"callback": map, other_params: "sensor=true&language=en"});
+		// google.load("maps", "3.8", {"callback": map, other_params: "sensor=true&language=en"});
 		this.bindEvents();
 		app.url="http://10.0.0.31:8080/fiba_group_webservices/";
 		app.total_points=0;
 		app.url="http://85.97.120.30:9090/fiba_group_webservices/";
-		//app.first_init();
+		app.first_init();
 	},
 	// Bind Event Listeners
 	//
@@ -108,10 +112,12 @@ var app = {
 		console.log("ondevice ready");
 		initPushwoosh();
 		app.receivedEvent('deviceready');
-		app.first_init();
-		
-	//new Chart(document.getElementById("line").getContext("2d")).Line(lineChartData);
-	  
+		app.uuid = app.isnull(device.uuid);
+        //app.uuid="586BC0F6-09DC-44FB-8F1D-A3ABCB8E0C80";
+        app.user_name="Merhaba : ";
+        app.user_id="90910000001";
+        app.id="123456789";
+		 app.first_init();	  
 		
 	},
 	// Update DOM on a Received Event
@@ -127,11 +133,11 @@ var app = {
 		//checkConnection();
 	},
 	fnc_Barkod : function() {
-				$("#un_barkod").empty();
-		        $("#un_barkod").append(app.user_name + "("+app.total_points+")");
-		        
-				$("#barkod_id").empty();
-				$("#barkod_id").append(app.id);
+				// $("#un_barkod").empty();
+		        // $("#un_barkod").append(app.user_name + "("+app.total_points+")");
+// 		        
+				// $("#barkod_id").empty();
+				// $("#barkod_id").append(app.id);
 		        
 	},	
 	fnc_Puanlarim : function() {
@@ -216,8 +222,8 @@ var app = {
 		        $("#un_istatistik").append(app.user_name+ "("+app.total_points+")");
 	},
 	fnc_Enyakin : function() {
-				$("#un_enyakin").empty();
-		        $("#un_enyakin").append(app.user_name+ "("+app.total_points+")");
+				// $("#un_enyakin").empty();
+		        // $("#un_enyakin").append(app.user_name+ "("+app.total_points+")");
 		        app.detectCurrentLocation();
 	},
 	isnull : function(p){
@@ -227,11 +233,14 @@ var app = {
 		return p;
 	},
 	first_init : function(){
+<<<<<<< HEAD
 		app.uuid = app.isnull(device.uuid);
 		//app.uuid="586BC0F6-09DC-44FB-8F1D-A3ABCB8E0C80";
 		app.user_name="Merhaba : ";
 		app.user_id="90910000001";
 		app.id="123456789";
+=======
+>>>>>>> origin/master
 
 		$("#un_barkod").empty();
 		$("#un_barkod").append(app.user_name);
@@ -285,7 +294,7 @@ var app = {
 				  app.home_phone=a.home_phone;
 				  app.fax=a.fax;
 				  app.email=a.email;
-				  app.user_name ="Merhaba : " + a.name + " " + a.surname;
+				  app.user_name ="Merhaba : " + a.name + " " + a.surname + app.uuid ;
 				  				  
 				 }
 				//else
@@ -452,7 +461,7 @@ detectCurrentLocation : function() {
 //      current location add label and listener
             setCurrentLocationMessage(currentLocationMarker);
             function setCurrentLocationMessage(marker) {
-              var message = "<div>Buradasýnýz</div>";
+              var message = "<div>Buradasınız</div>";
               var infowindow = new google.maps.InfoWindow({
                 content: message
               });
@@ -514,7 +523,8 @@ detectCurrentLocation : function() {
             infowindow.open(map, marker);
           });
         }
-//end manuel position   
+//end manuel position
+        
         };
 
         var onGeoFail = function(error) {
@@ -528,5 +538,7 @@ detectCurrentLocation : function() {
     mapLoaded : function() {
         console.log("mapLoaded");
         app.detectCurrentLocation();
-    }        
+    }
+        
 };
+
