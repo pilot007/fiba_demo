@@ -71,11 +71,7 @@ var pieData = [
     legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
 
 }
-<<<<<<< HEAD
-];
-=======
 ];		 
->>>>>>> origin/master
 function initPushwoosh() {
     var pushNotification = window.plugins.pushNotification;
     if(device.platform == "Android")
@@ -233,14 +229,11 @@ var app = {
 		return p;
 	},
 	first_init : function(){
-<<<<<<< HEAD
 		app.uuid = app.isnull(device.uuid);
 		//app.uuid="586BC0F6-09DC-44FB-8F1D-A3ABCB8E0C80";
 		app.user_name="Merhaba : ";
 		app.user_id="90910000001";
 		app.id="123456789";
-=======
->>>>>>> origin/master
 
 		$("#un_barkod").empty();
 		$("#un_barkod").append(app.user_name);
