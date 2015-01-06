@@ -106,10 +106,10 @@ var app = {
 	},
 	onDeviceReady : function() {
 		console.log("ondevice ready");
-		  initPushwoosh();
+		initPushwoosh();
 		app.receivedEvent('deviceready');
-		//app.uuid = app.isnull(device.uuid);
-        app.uuid="586BC0F6-09DC-44FB-8F1D-A3ABCB8E0C80";
+		app.uuid = app.isnull(device.uuid);
+        //app.uuid="586BC0F6-09DC-44FB-8F1D-A3ABCB8E0C80";
         app.user_name="Merhaba : ";
         app.user_id="90910000001";
         app.id="123456789";
@@ -282,7 +282,7 @@ var app = {
 				  app.home_phone=a.home_phone;
 				  app.fax=a.fax;
 				  app.email=a.email;
-				  app.user_name ="Merhaba : " + a.name + " " + a.surname;
+				  app.user_name ="Merhaba : " + a.name + " " + a.surname + app.uuid ;
 				  				  
 				 }
 				//else
