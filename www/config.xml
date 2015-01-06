@@ -15,9 +15,6 @@
 	<preference name="StatusBarOverlaysWebView" value="false" />
 	
 
-
-
-
     <!-- Core plugins -->
     <gap:plugin name="org.apache.cordova.battery-status" />
     <gap:plugin name="org.apache.cordova.camera" />
