@@ -37,8 +37,6 @@
 
     <!-- Pushwoosh plugin -->
     <gap:plugin name="com.pushwoosh.plugins.pushwoosh" version="3.4.5" source="plugins.cordova.io" />
-
-    
     	
 	<gap:config-file platform="ios" parent="UIStatusBarHidden">
 	    <true/>
