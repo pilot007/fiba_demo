@@ -71,24 +71,24 @@ var pieData = [
     legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
 
 }
-];		 
-	function initPushwoosh() {
-    var pushNotification = window.plugins.pushNotification;
-    if(device.platform == "Android")
-    {
-        registerPushwooshAndroid();
-    }
+];
+function initPushwoosh() {
+	var pushNotification = window.plugins.pushNotification;
+	if(device.platform == "Android")
+	{
+		registerPushwooshAndroid();
+	}
 
-    if(device.platform == "iPhone" || device.platform == "iOS")
-    {
-        registerPushwooshIOS();
-    }
+	if(device.platform == "iPhone" || device.platform == "iOS")
+	{
+		registerPushwooshIOS();
+	}
 }
 var app = {
 	// Application Constructor
 	initialize : function() {
 		console.log("init");
-		// google.load("maps", "3.8", {"callback": map, other_params: "sensor=true&language=en"});
+		google.load("maps", "3.8", {"callback": map, other_params: "sensor=true&language=en"});
 		this.bindEvents();
 		app.url="http://10.0.0.31:8080/fiba_group_webservices/";
 		app.total_points=0;
@@ -106,16 +106,14 @@ var app = {
 	},
 	onDeviceReady : function() {
 		console.log("ondevice ready");
+		initPushwoosh();
 		app.receivedEvent('deviceready');
-		//app.uuid = app.isnull(device.uuid);
-        app.uuid="586BC0F6-09DC-44FB-8F1D-A3ABCB8E0C80";
-        app.user_name="Merhaba : ";
-        app.user_id="90910000001";
-        app.id="123456789";
 		app.first_init();
-		//initPushwoosh();
-	},
 		
+	//new Chart(document.getElementById("line").getContext("2d")).Line(lineChartData);
+	  
+		
+	},
 	// Update DOM on a Received Event
 	receivedEvent : function(id) {
 		console.log("receive event");
@@ -125,20 +123,22 @@ var app = {
 		$.mobile.transitionFallbacks.slide = 'none';
 		$.mobile.transitionFallbacks.pop = 'none';
 		$.mobile.buttonMarkup.hoverDelay = 0;
+		
+		//checkConnection();
 	},
 	fnc_Barkod : function() {
-				 $("#un_barkod").empty();
-		         $("#un_barkod").append(app.user_name + "("+app.total_points+")");
- 		        
-				 $("#barkod_id").empty();
-				 $("#barkod_id").append(app.id);
+				$("#un_barkod").empty();
+		        $("#un_barkod").append(app.user_name + "("+app.total_points+")");
+		        
+				$("#barkod_id").empty();
+				$("#barkod_id").append(app.id);
 		        
 	},	
 	fnc_Puanlarim : function() {
 				$("#un_puanlarim").empty();
 		        $("#un_puanlarim").append(app.user_name + "("+app.total_points+")");		        
 		$.ajax({
-			url : app.url+"GetAcitivies?member_id="+app.id+"&uuid="+app.uuid,
+			url : app.url+"GetAcitivies?member_id="+app.id,
 			dataType : "json",
 			success : function(a, b, c) {
 				console.log("puanlarım 2");
@@ -216,8 +216,8 @@ var app = {
 		        $("#un_istatistik").append(app.user_name+ "("+app.total_points+")");
 	},
 	fnc_Enyakin : function() {
-				// $("#un_enyakin").empty();
-		        // $("#un_enyakin").append(app.user_name+ "("+app.total_points+")");
+				$("#un_enyakin").empty();
+		        $("#un_enyakin").append(app.user_name+ "("+app.total_points+")");
 		        app.detectCurrentLocation();
 	},
 	isnull : function(p){
@@ -228,7 +228,7 @@ var app = {
 	},
 	first_init : function(){
 		app.uuid = app.isnull(device.uuid);
-		//app.uuid="586BC0F6-09DC-44FB-8F1D-A3ABCB8E0C80";
+		app.uuid="586BC0F6-09DC-44FB-8F1D-A3ABCB8E0C80";
 		app.user_name="Merhaba : ";
 		app.user_id="90910000001";
 		app.id="123456789";
@@ -243,7 +243,7 @@ var app = {
 		new Chart(document.getElementById("line").getContext("2d")).Line(lineChartData);
 
 		$.ajax({
-			url : app.url+"GetAcitivies?member_id="+app.id+"&conType=totalpoint&uuid="+app.uuid,
+			url : app.url+"GetAcitivies?member_id="+app.id+"&conType=totalpoint",
 			dataType : "json",
 			success : function(a, b, c) {
 					app.total_points=a[0].total_point;
@@ -266,7 +266,7 @@ var app = {
 		//if(app.name==null)
 		{
 		$.ajax({			
-			url : app.url+"GetMember?member_id="+app.id+"&uuid="+app.uuid,
+			url : app.url+"GetMember?member_id="+app.id,
 			dataType : "json",
 			success : function(a, b, c) {
 				{
@@ -285,7 +285,7 @@ var app = {
 				  app.home_phone=a.home_phone;
 				  app.fax=a.fax;
 				  app.email=a.email;
-				  app.user_name ="Merhaba : " + a.name + " " + a.surname  ;
+				  app.user_name ="Merhaba : " + a.name + " " + a.surname;
 				  				  
 				 }
 				//else
@@ -452,7 +452,7 @@ detectCurrentLocation : function() {
 //      current location add label and listener
             setCurrentLocationMessage(currentLocationMarker);
             function setCurrentLocationMessage(marker) {
-              var message = "<div>Buradasınız</div>";
+              var message = "<div>Buradasýnýz</div>";
               var infowindow = new google.maps.InfoWindow({
                 content: message
               });
@@ -514,8 +514,7 @@ detectCurrentLocation : function() {
             infowindow.open(map, marker);
           });
         }
-//end manuel position
-        
+//end manuel position   
         };
 
         var onGeoFail = function(error) {
@@ -529,7 +528,5 @@ detectCurrentLocation : function() {
     mapLoaded : function() {
         console.log("mapLoaded");
         app.detectCurrentLocation();
-    }
-        
+    }        
 };
-
